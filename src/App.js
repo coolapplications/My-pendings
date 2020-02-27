@@ -1,17 +1,14 @@
 import React from "react";
 import Form from "./components/Form";
-import List from "./components/List";
+import Lists from "./components/Lists";
 import NavBar from "./components/NavBar";
 
 const App = () => {
   return (
     <div>
       <NavBar/>
-      <List />
-      <div>"
-        
-        "
-      </div>
+      <Lists />
+      <div style={{margin: "40px"}} />
       <Form />
     </div>
   );
