@@ -3,16 +3,16 @@ import React from 'react';
 function Form(props) {
   const handleSubmit = event => {
     event.preventDefault();
-    console.log(event.target.responsible.value);
     if (event.target.responsible.value && event.target.text.value) {
-      props.setToDos([
-        ...props.toDos,
-        {
+      props.dispatch({
+        type: 'addToDo',
+        payload: {
           responsible: event.target.responsible.value,
           text: event.target.text.value,
-          isPending: true
+          isPending: true,
+          date: new Date().toString()
         }
-      ]);
+      });
     }
 
     event.target.reset();

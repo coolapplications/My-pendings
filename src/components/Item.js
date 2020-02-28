@@ -6,11 +6,11 @@ function Item(props) {
       <div className='list-group'>
         <a className='list-group-item list-group-item-action'>
           <div className='d-flex w-100 justify-content-between'>
-            <h5 className='mb-1'>{props.responsible}</h5>
-            <small>{props.text}</small>
+            <h5 className='mb-1'>{props.toDo.responsible}</h5>
+            <small>{props.toDo.isPending ? 'Pending' : 'Completed'}</small>
           </div>
-          <p className='mb-1'>Active</p>
-          <small>date</small>
+          <p className='mb-1'>{props.toDo.text}</p>
+          <small>{props.toDo.date}</small>
         </a>
       </div>
     </div>
