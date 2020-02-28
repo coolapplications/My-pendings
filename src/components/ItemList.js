@@ -1,10 +1,8 @@
-import React from "react";
-import List from "./Item";
+import React from 'react';
+import Item from './Item';
 
-export const Lists = props => {
-  console.log(props.responsible, props.pending);
-
-  return props.map(() => (
-    <List responsible={props.responsible} pending={props.pending} />
+export default function ItemList(props) {
+  return props.toDos.map((item, index) => (
+    <Item key={index} responsible={item.responsible} text={item.text} />
   ));
-};
+}

@@ -1,18 +1,17 @@
-import React from "react";
-import Form, { setResponsible, setPending } from "./components/Form";
-import Lists from "./components/ItemList";
-import NavBar from "./components/NavBar";
+import React, { useState } from 'react';
+import Form from './components/Form';
+import ItemList from './components/ItemList';
+import NavBar from './components/NavBar';
 
 const App = () => {
-  const [responsible] = setResponsible("");
-  const [pending] = setPending("");
-  const data = [responsible, pending];
+  const [toDos, setToDos] = useState([]);
+
   return (
     <div>
       <NavBar />
-      <Lists responsible={data.responsible} pending={data.pending} />
-      <div style={{ margin: "40px" }} />
-      <Form />
+      <ItemList toDos={toDos} />
+      <div style={{ margin: '40px' }} />
+      <Form toDos={toDos} setToDos={setToDos} />
     </div>
   );
 };

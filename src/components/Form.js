@@ -1,45 +1,41 @@
-import React, { useState } from "react";
+import React from 'react';
 
-function Form() {
-  const [setResponsible] = useState("");
-  const [setPending] = useState("");
-  const [setState] = useState(false);
-  //const[date, setDate]=useState(newDate);
-
+function Form(props) {
   const handleSubmit = event => {
     event.preventDefault();
-    if (event.target.responsible.value && event.target.responsible.value) {
-      setResponsible(event.target.responsible.value);
-      setPending(event.target.pending.value);
-      setState(true);
+    console.log(event.target.responsible.value);
+    if (event.target.responsible.value && event.target.text.value) {
+      props.setToDos([
+        ...props.toDos,
+        {
+          responsible: event.target.responsible.value,
+          text: event.target.text.value,
+          isPending: true
+        }
+      ]);
     }
 
-    //clearForm();
-
-    /* fetch('/api/form-submit-url', {
-      method: 'POST',
-      body: data,
-    }); */
+    event.target.reset();
   };
 
   return (
     <div>
-      <div class="container">
+      <div className='container'>
         <form onSubmit={handleSubmit}>
-          <div class="form-group">
-            <label for="responsible">Responsible</label>
+          <div className='form-group'>
+            <label forhtml='responsible'>Responsible</label>
             <input
-              type="text"
-              class="form-control"
-              id="responsible"
-              placeholder="Your name"
+              type='text'
+              className='form-control'
+              id='responsible'
+              placeholder='Your name'
             />
           </div>
-          <div class="form-group">
-            <label for="pending">Write your pending</label>
-            <textarea class="form-control" id="pending" rows="3"></textarea>
+          <div className='form-group'>
+            <label forhtml='text'>Write your pending</label>
+            <textarea className='form-control' id='text' rows='3'></textarea>
           </div>
-          <button type="submit" class="btn btn-primary">
+          <button type='submit' className='btn btn-primary'>
             Add Pending stuff
           </button>
         </form>
