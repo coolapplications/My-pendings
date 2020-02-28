@@ -1,4 +1,5 @@
 import React from "react";
+import { postToDo, getToDos } from "../APIs/ApiGatewayCalls";
 
 function Form(props) {
   const handleSubmit = event => {
@@ -18,7 +19,7 @@ function Form(props) {
         }
       });
     }
-
+    getToDos();
     event.target.reset();
   };
 
@@ -26,7 +27,6 @@ function Form(props) {
     <div>
       <div className="container">
         <form onSubmit={handleSubmit}>
-          
           <div className="form-group">
             <label forhtml="title">Title</label>
             <input
@@ -58,6 +58,9 @@ function Form(props) {
             Add Pending stuff
           </button>
         </form>
+        <button type="button" className="btn btn-primary mt-1">
+          Update to do's
+        </button>
       </div>
     </div>
   );
