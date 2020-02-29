@@ -1,21 +1,9 @@
-import toDos from '../App';
 import Axios from 'axios';
+
 import { url } from '../utils/URL';
 
-export function postToDo() {
-  Axios.post('http://localhost:3000/utils/ToDos', {
-    id: toDos.id,
-    title: toDos.title,
-    description: toDos.description,
-    responsible: toDos.responsible,
-    isComplete: toDos.isComplete
-  })
-    .then(function(response) {
-      console.log(response);
-    })
-    .catch(function(error) {
-      console.log(error);
-    });
+export function postToDo(todo) {
+  return Axios.post(`${url}/todos`, todo);
 }
 
 export function getToDos() {

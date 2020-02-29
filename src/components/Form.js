@@ -1,5 +1,4 @@
 import React from 'react';
-import { postToDo, getToDos } from '../APIs/ApiGatewayCalls';
 
 function Form(props) {
   const handleSubmit = event => {
@@ -9,22 +8,23 @@ function Form(props) {
       event.target.description.value &&
       event.target.title.value
     ) {
-      props.dispatch({
-        type: 'addToDo',
-        payload: {
-          responsible: event.target.responsible.value,
-          description: event.target.description.value,
-          isCompleted: true,
-          title: event.target.title.value
-        }
-      });
+      const todo = {
+        title: event.target.title.value,
+        description: event.target.description.value,
+        responsible: event.target.responsible.value,
+        isComplete: event.target.isCompleted.value ? 1 : 0
+      };
+      console.log('In form is: ', todo);
+      props.dispatch(todo);
     }
-    getToDos();
     event.target.reset();
   };
 
   return (
     <div>
+      {props.isPending && <div>Enviando datos...</div>}
+      {props.errorMessage && <div>Error: {props.errorMessage}</div>}
+      {props.isSuccess && <div>Datos guardados correctament</div>}
       <div className='container'>
         <form onSubmit={handleSubmit}>
           <div className='form-group'>
@@ -54,6 +54,17 @@ function Form(props) {
               placeholder='Your name'
             />
           </div>
+          <div className='form-group'>
+            <input
+              type='checkbox'
+              className='form-check-input'
+              id='isCompleted'
+            />
+            <label className='form-check-label' htmlFor='isCompleted'>
+              Is completed?
+            </label>
+          </div>
+
           <button type='submit' className='btn btn-primary'>
             Add Pending stuff
           </button>

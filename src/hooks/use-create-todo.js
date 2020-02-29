@@ -1,17 +1,19 @@
 import { useState } from 'react';
-import { getToDos } from '../APIs/ApiGatewayCalls';
+import { postToDo } from '../APIs/ApiGatewayCalls';
 
-export function useGetTodos() {
-  const [todos, setTodos] = useState([]);
+export function useCreateTodo() {
+  const [isSuccess, setIsSuccess] = useState(false);
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState();
 
-  function fetchTodos() {
+  function createTodo(todo) {
+    console.log('Todo in reducer is: ', todo);
+    setIsSuccess(false);
     setIsPending(true);
     setError(null);
-    getToDos()
+    postToDo(todo)
       .then(response => {
-        setTodos(response.data);
+        setIsSuccess(true);
         setIsPending(false);
       })
       .catch(err => {
@@ -25,5 +27,5 @@ export function useGetTodos() {
       });
   }
 
-  return [todos, isPending, error, fetchTodos];
+  return [isSuccess, isPending, error, createTodo];
 }

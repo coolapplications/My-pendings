@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Item from './Item';
 import { useGetTodos } from '../hooks/use-get-todos';
 
-export default function ItemList(props) {
+export default function ItemList() {
   const [todos, isPending, error, fetchTodos] = useGetTodos();
 
   useEffect(fetchTodos, []);
