@@ -20,6 +20,10 @@ function Form(props) {
     event.target.reset();
   };
 
+  function refreshPage() {
+    window.location.reload();
+  }
+
   return (
     <div>
       {props.isPending && <div>Enviando datos...</div>}
@@ -68,10 +72,14 @@ function Form(props) {
           <button type='submit' className='btn btn-primary'>
             Add Pending stuff
           </button>
+          <button
+            type='submit'
+            onClick={refreshPage}
+            className='btn btn-primary ml-2'
+          >
+            Update To do's
+          </button>
         </form>
-        <button type='button' className='btn btn-primary mt-1'>
-          Update to do's
-        </button>
       </div>
     </div>
   );

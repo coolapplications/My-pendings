@@ -10,6 +10,14 @@ export function getToDos() {
   return Axios.get(`${url}/todos`);
 }
 
+export function deleteToDo(id) {
+  return Axios.delete(`${url}/todos/${id}`);
+}
+
+export function updateToDO(todo) {
+  return Axios.put(`${url}/todos/${todo.id}`);
+}
+
 // Delete example
 /*export function postToDo(id) {
   return Axios.delete(`${url}/todos/${id}`);
