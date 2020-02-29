@@ -1,18 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function Form(props) {
+  const [title, setTitle] = useState(props.todo ? props.todo.title : '');
+  const [description, setDescription] = useState(
+    props.todo ? props.todo.description : ''
+  );
+  const [responsible, setResponsible] = useState(
+    props.todo ? props.todo.responsible : ''
+  );
+  const [isComplete, setIsComplete] = useState(
+    props.todo ? (props.todo.isComplete ? true : false) : false
+  );
+
   const handleSubmit = event => {
     event.preventDefault();
-    if (
-      event.target.responsible.value &&
-      event.target.description.value &&
-      event.target.title.value
-    ) {
+    if (responsible && description && title) {
       const todo = {
-        title: event.target.title.value,
-        description: event.target.description.value,
-        responsible: event.target.responsible.value,
-        isComplete: event.target.isCompleted.value ? 1 : 0
+        id: props.todo ? props.todo.id : undefined,
+        title,
+        description,
+        responsible,
+        isComplete: isComplete ? 1 : 0
       };
       console.log('In form is: ', todo);
       props.dispatch(todo);
@@ -20,15 +28,11 @@ function Form(props) {
     event.target.reset();
   };
 
-  function refreshPage() {
-    window.location.reload();
-  }
-
   return (
     <div>
       {props.isPending && <div>Enviando datos...</div>}
       {props.errorMessage && <div>Error: {props.errorMessage}</div>}
-      {props.isSuccess && <div>Datos guardados correctament</div>}
+      {props.isSuccess && <div>Datos guardados correctamente</div>}
       <div className='container'>
         <form onSubmit={handleSubmit}>
           <div className='form-group'>
@@ -38,6 +42,8 @@ function Form(props) {
               className='form-control'
               id='title'
               placeholder='Your todo title'
+              value={title}
+              onChange={event => setTitle(event.target.value)}
             />
           </div>
 
@@ -47,6 +53,8 @@ function Form(props) {
               className='form-control'
               id='description'
               rows='3'
+              value={description}
+              onChange={event => setDescription(event.target.value)}
             ></textarea>
           </div>
           <div className='form-group'>
@@ -56,6 +64,8 @@ function Form(props) {
               className='form-control'
               id='responsible'
               placeholder='Your name'
+              value={responsible}
+              onChange={event => setResponsible(event.target.value)}
             />
           </div>
           <div className='form-group'>
@@ -63,6 +73,8 @@ function Form(props) {
               type='checkbox'
               className='form-check-input'
               id='isCompleted'
+              checked={isComplete}
+              onChange={event => setIsComplete(event.target.value)}
             />
             <label className='form-check-label' htmlFor='isCompleted'>
               Is completed?
@@ -71,13 +83,6 @@ function Form(props) {
 
           <button type='submit' className='btn btn-primary'>
             Add Pending stuff
-          </button>
-          <button
-            type='submit'
-            onClick={refreshPage}
-            className='btn btn-primary ml-2'
-          >
-            Update To do's
           </button>
         </form>
       </div>
