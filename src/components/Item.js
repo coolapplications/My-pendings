@@ -1,12 +1,9 @@
 import React from 'react';
-import { updateToDO, deleteToDo } from '../APIs/ApiGatewayCalls';
 import { useDeleteTodo } from '../hooks/use-delete-todo';
 import { useHistory } from 'react-router-dom';
 
 function Item(props) {
-  const [isSuccess, isPending, error, deleteTodo] = useDeleteTodo(
-    props.toDo.id
-  );
+  const [isSuccess, isPending, deleteTodo] = useDeleteTodo(props.toDo.id);
 
   const history = useHistory();
 
@@ -32,10 +29,18 @@ function Item(props) {
             </h5>
             <h5>{props.toDo.isComplete ? 'Completed' : 'Pending'}</h5>
             <div>
-              <button onClick={deleteItem} disabled={isPending}>
+              <button
+                className='btn btn-primary btn-sm m-1'
+                onClick={deleteItem}
+                disabled={isPending}
+              >
                 Delete
               </button>
-              <button onClick={updateItem} disabled={isPending}>
+              <button
+                className='btn btn-secondary btn-sm m-1'
+                onClick={updateItem}
+                disabled={isPending}
+              >
                 Update
               </button>
             </div>

@@ -21,7 +21,7 @@ export default function ItemList() {
         type='submit'
         onClick={refreshToDos}
         disabled={isPending}
-        className='btn btn-primary ml-2'
+        className='btn btn-primary btn-sm m-3'
       >
         Update To do's
       </button>
