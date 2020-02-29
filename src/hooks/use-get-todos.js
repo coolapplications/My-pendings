@@ -25,5 +25,5 @@ export function useGetTodos() {
       });
   }
 
-  return [todos, isPending, error, fetchTodos];
+  return [todos, setTodos, isPending, error, fetchTodos];
 }

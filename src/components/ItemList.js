@@ -3,12 +3,16 @@ import Item from './Item';
 import { useGetTodos } from '../hooks/use-get-todos';
 
 export default function ItemList() {
-  const [todos, isPending, error, fetchTodos] = useGetTodos();
+  const [todos, setTodos, isPending, error, fetchTodos] = useGetTodos();
 
   useEffect(fetchTodos, []);
 
   function refreshToDos() {
     fetchTodos();
+  }
+
+  function removeTodo(id) {
+    setTodos(todos.filter(todo => todo.id !== id));
   }
 
   return (
@@ -24,7 +28,7 @@ export default function ItemList() {
       {isPending && <div>Loading Todos From Api....</div>}
       {error && <div>Ha ocurrido un error: {error}</div>}
       {todos.map(item => (
-        <Item key={item.id} toDo={item} />
+        <Item key={item.id} toDo={item} removeToDo={removeTodo} />
       ))}
     </div>
   );

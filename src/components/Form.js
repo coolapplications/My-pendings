@@ -74,7 +74,7 @@ function Form(props) {
               className='form-check-input'
               id='isCompleted'
               checked={isComplete}
-              onChange={event => setIsComplete(event.target.value)}
+              onChange={event => setIsComplete(event.target.checked)}
             />
             <label className='form-check-label' htmlFor='isCompleted'>
               Is completed?
