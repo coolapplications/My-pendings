@@ -1,24 +1,26 @@
 import React from 'react';
-import Form from './components/Form';
-import ItemList from './components/ItemList';
-import NavBar from './components/NavBar';
-import { useCreateTodo } from './hooks/use-create-todo';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+
+import CreateTodoPage from './pages/create-todo-page';
+import ListTodosPage from './pages/list-todos-page';
+import UpdateTodosPage from './pages/update-todo-page';
 
 const App = () => {
-  const [isSuccess, isPending, error, createTodo] = useCreateTodo();
-
   return (
-    <div>
-      <NavBar />
-      <ItemList />
-      <div style={{ margin: '40px' }} />
-      <Form
-        isSuccess={isSuccess}
-        isPending={isPending}
-        errorMessage={error}
-        dispatch={createTodo}
-      />
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route path='/todos'>
+          <ListTodosPage />
+        </Route>
+        <Route path='/create'>
+          <CreateTodoPage />
+        </Route>
+        <Route path='/edit/todos/:todoId'>
+          <UpdateTodosPage />
+        </Route>
+        <Redirect from='/' to='/todos' />
+      </Switch>
+    </BrowserRouter>
   );
 };
 

@@ -6,6 +6,10 @@ export function postToDo(todo) {
   return Axios.post(`${url}/todos`, todo);
 }
 
+export function getToDo(id) {
+  return Axios.get(`${url}/todos/${id}`);
+}
+
 export function getToDos() {
   return Axios.get(`${url}/todos`);
 }
@@ -14,8 +18,8 @@ export function deleteToDo(id) {
   return Axios.delete(`${url}/todos/${id}`);
 }
 
-export function updateToDO(todo) {
-  return Axios.put(`${url}/todos/${todo.id}`);
+export function updateToDo(todo) {
+  return Axios.put(`${url}/todos/${todo.id}`, todo);
 }
 
 // Delete example
