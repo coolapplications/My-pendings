@@ -3,7 +3,9 @@ import { useDeleteTodo } from '../hooks/use-delete-todo';
 import { useHistory } from 'react-router-dom';
 
 function Item(props) {
-  const [isSuccess, isPending, deleteTodo] = useDeleteTodo(props.toDo.id);
+  const [isSuccess, isPending, error, deleteTodo] = useDeleteTodo(
+    props.toDo.id
+  );
 
   const history = useHistory();
 
